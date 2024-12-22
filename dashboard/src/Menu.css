@@ -1,0 +1,21 @@
+.menu{
+        display: flex;
+        height: 10vh;
+        align-items: center;
+        /* width: 100%; */
+}
+.logo{
+        margin-right: 30vw;
+}
+.menus{
+        display: flex;
+        
+}
+ul{
+        display: flex;
+        margin-top: 10px;
+}
+ul li{
+        list-style: none;
+        padding: 10px 12px;
+}

@@ -1,0 +1,15 @@
+.navbar-brand{
+        color:#666;
+}
+
+.navbar-nav{
+        padding: 0px 150px;
+}
+
+.nav-link{
+        margin-left: 40px;
+        color: #666;
+}
+.nav-link:hover{
+        color: #387ed1;
+}

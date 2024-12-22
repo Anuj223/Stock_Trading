@@ -1,0 +1,29 @@
+#sec{
+        background-color: rgb(140 151 147);
+        color: rgb(255 248 248);
+        padding: 10px 0px ;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#hero{
+        display: flex;
+        justify-content: space-between;
+        margin: 0 80px;
+}
+#hero a{
+        color: rgb(255 248 248);
+}
+input{
+        text-align: center;
+        padding: 2px 8px;
+        border-radius: 5px;
+        border:none;
+        width: 90%;
+        margin-right: 3px;
+}
+i{
+        font-size: 1.3rem;
+}
+.col-6 a{
+        color: rgb(255 248 248);
+
+}
