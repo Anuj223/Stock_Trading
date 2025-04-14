@@ -1,13 +1,12 @@
 
-export default function Orders(){
+export default function Apps(){
         return(
                 
-        <div className="">
-               <div className="border-bottom">
+        <div className="container">
+               <div className="row border-bottom">
                <h2>Hii,Aj</h2>
 
                </div>
-               
 
         </div>
         )

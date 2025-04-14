@@ -48,7 +48,7 @@ export default function Signup()
                       // localStorage.setItem("user", JSON.stringify(user));
 
                       setTimeout(() => {
-                        navigate("/dashboard");
+                        navigate("/");
                         // navigate("localhost:5174/");
                         // const userParam = encodeURIComponent(JSON.stringify(user));
                         // window.location.href = `http://localhost:5174/?user=${userParam}`;

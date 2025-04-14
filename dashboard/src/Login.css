@@ -1,0 +1,16 @@
+.form_container{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+}
+h2{
+        margin-top: 12px;
+        font-size: 1.7rem;
+        color: #3a2f2f;
+}
+.submit{
+        margin: 10px auto;
+        display: flex;
+        
+}

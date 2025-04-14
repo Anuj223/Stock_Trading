@@ -1,0 +1,10 @@
+.section{
+        width: 98%;
+}
+.data{
+        display: flex;
+        flex-direction: column;
+}
+.padd{
+        border-bottom:1px solid #9eadb6;
+}

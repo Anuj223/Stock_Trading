@@ -1,0 +1,42 @@
+table th{
+        margin: 5px;
+        padding: 3px 32px;
+}
+.order-table td{
+        
+        margin: 5px;
+        padding: 3px 32px;
+}
+thead{
+        border-top: 1px solid #9eadbd;
+        border-bottom: 1px solid #9eadbd;
+      }            
+      table th{
+              margin: 5px;
+              padding: 3px 32px;
+      }
+      .order-table tr {
+        border-top: 1px solid #9eadbd;
+        border-bottom: 1px solid #9eadbd;
+      }
+      .order-table tr th:nth-child(1),
+      .order-table tr th:nth-child(4) {
+        border-right: 1px solid #9eadbd;
+      }
+      .order-table tr td:nth-child(1),
+      .order-table tr td:nth-child(4) {
+        border-right: 1px solid #9eadbd;
+      }
+      .order-table td{
+              
+              margin: 5px;
+              padding: 3px 32px;
+      }
+      
+.order-table td.profit {
+        color: rgb(72, 194, 55);
+      }
+      
+      .order-table td.loss {
+        color: rgb(250, 118, 78);
+      }

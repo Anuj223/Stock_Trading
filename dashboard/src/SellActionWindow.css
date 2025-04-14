@@ -1,0 +1,33 @@
+.containe{
+        width: 40%;
+        position: fixed;
+        top: 65%;
+        bottom: 0%;
+        left: 35%;
+        z-index: 1000;
+        background-color: rgb(201 37 37);
+        color: #fffdfd;
+        padding-left: 12px;
+}
+.headS h2{
+        /* background-color: rgb(76 85 108); */
+        /* background-color: rgb(0 71 255); */
+        font-size: 1.5rem;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+}
+.inputsS{
+        display: flex;
+        padding-top: 6px;
+        margin-top: 4px;
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+}
+legend{
+        font-size: 0.9rem;
+}
+input{
+        border-radius: 5px;
+        border: none;
+        outline: none;
+}

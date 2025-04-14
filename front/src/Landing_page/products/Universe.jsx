@@ -9,7 +9,7 @@ export default function Universe() {
             </p>
             <div className="row">
               <div className="col-4 p-3">
-                <img src="public/images/zerodhaFundhouse.png" alt="" style={{width:"55%"}}/>
+                <img src="images/zerodhaFundhouse.png" alt="" style={{width:"55%"}}/>
                 <p className="text-muted text-small mt-2">Our asset management venture is creating simple and transparent index funds to help you save for your financial goals.</p>
               </div>
               <div className="col-4 p-3">
@@ -24,7 +24,7 @@ export default function Universe() {
       
             <div className="row">
               <div className="col-4 p-3">
-                <img src="public/images/streakLogo.png" alt="" style={{width:"55%"}}/>
+                <img src="images/streakLogo.png" alt="" style={{width:"55%"}}/>
                 <p className="text-muted text-small mt-2">A systematic trading platform that allows you to create and backtest strategies without writing any code.</p>
               </div>
               <div className="col-4 p-3">
@@ -33,7 +33,7 @@ export default function Universe() {
               
               </div>
               <div className="col-4 p-3">
-                <img src="public/images/dittoLogo.png" alt="" style={{width:"55%"}}/>
+                <img src="images/dittoLogo.png" alt="" style={{width:"55%"}}/>
                 <p className="text-muted text-small mt-2">Get personalized advice on life and health insurance—no spam, no mis-selling, just expert recommendations.</p>
               </div>
               <button className='message btn btn-primary'>Sign up for free</button>
