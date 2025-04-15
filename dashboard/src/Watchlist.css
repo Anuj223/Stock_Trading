@@ -1,5 +1,5 @@
 .Watch{
-        margin-top: 7px;
+        /* margin-top: 7px; */
         width: 328px;
         height: 100vh;
         border-right: 1px solid #9eadbd;
@@ -62,7 +62,7 @@
         position: absolute;
         top: 0;
         left: 45px;
-        width: 100%;
+        width: 75%;
         height: 100%;
         align-items: center; 
         justify-content: flex-end;

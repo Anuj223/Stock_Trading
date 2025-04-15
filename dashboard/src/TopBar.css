@@ -4,6 +4,8 @@
         height: 10vh;
         display: flex;
         align-items: center;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 .indices{
         display: flex;
@@ -14,12 +16,21 @@
         justify-content: space-around;
         padding-right: 10px;
 }
-.nifty,.sensex{
+.nasdaq{
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         padding: 0px 2px;
-        padding-right: 30px;
+        padding-right: 7px;
+}
+
+.dowjones
+{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 0px 2px;
+        padding-right: 7px;
 }
 .index{
         padding: 0px 4px;

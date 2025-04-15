@@ -14,9 +14,97 @@ import {MoreHoriz,BarChartOutlined, KeyboardArrowDown, KeyboardArrowUp } from "@
 
 import DoughnutGraph from "./DoughnutGraph";
 
+
+const WatchListitem = ({ stock,onDelete }) => {
+  const [showWatchlistAction, setShowWatchlistAction] = useState(false);
+
+    const handleMouseEnter = (e) => {
+      setShowWatchlistAction(true);
+    };
+
+    const handleMouseLeave = (e) => {
+      setShowWatchlistAction(false);
+    };
+
+    return (
+      <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <div className="item">
+          <p className={stock.isDown ? "down" : "up"}>{stock.name}</p>
+          <div className="itemInfo">
+            <span className="percent">{stock.percent}</span>
+            {stock.isDown ? (
+              <KeyboardArrowDown className="down" />
+            ) : (
+              <KeyboardArrowUp className="up" />
+            )}
+            <span className="price">${stock.price}</span>
+          </div>
+          <button className="delete-button" 
+          onClick={()=>{onDelete(stock.name)}}
+>✖</button>
+        </div>
+  {showWatchlistAction && <WatchListActions uid={stock.name} price={stock.price} />}
+      </li>
+    );
+  };
+  const WatchListActions = ({ uid,price }) => {    
+    const generalContext = useContext(GeneralContext);
+
+    const handleBuyClick = () => {
+      generalContext.openBuyWindow(uid,price);
+    };
+
+    const handleSellClick = () =>{
+      generalContext.openSellWindow(uid,price);
+    }
+    return (
+      <span className="actions">
+        <span>
+          <Tooltip
+            title="Buy (B)"
+            placement="top"
+            arrow
+            TransitionComponent={Grow}
+            onClick={handleBuyClick}
+          >
+            <button className="buy">Buy</button>
+          </Tooltip>
+          
+          <Tooltip
+            title="Sell (S)"
+            placement="top"
+            arrow
+            TransitionComponent={Grow}
+            onClick={handleSellClick}
+          >
+            <button className="sell">Sell</button>
+          </Tooltip>
+          <Tooltip
+            title="Analytics (A)"
+            placement="top"
+            arrow
+            TransitionComponent={Grow}
+          >
+            <button className="action">
+              <BarChartOutlined className="icon" />
+            </button>
+          </Tooltip>
+          <Tooltip title="More" placement="top" arrow TransitionComponent={Grow}>
+            <button className="action">
+              <MoreHoriz className="icon" />
+            </button>
+          </Tooltip>
+        </span>
+      </span>
+    );
+  };
 const DEFAULT_SYMBOLS = [
-  "AAPL", "GOOGL", "MSFT", "TSLA", "AMZN",
-  "META", "NFLX", "NVDA", "INTC", "AMD"
+  "AAPL", 
+  "GOOGL", "MSFT", "TSLA", "AMZN",
+  
+  // "META"  
+  // "NFLX", "NVDA", "INTC", "AMD"
+
 ]; 
 
 export default function Watchlist() {
@@ -69,7 +157,7 @@ const [watchlist, setWatchList] = useState([]);
       );
       const data = await response.json();
   
-      const formattedData = watchlist.map(stock => {
+      const formattedData = watchlist.map((stock) => {
         const quote = data[stock.symbol || stock.name];
   
         if (!quote || quote.code || !quote.price) return null;
@@ -78,6 +166,7 @@ const [watchlist, setWatchList] = useState([]);
         const previousClose = parseFloat(quote.previous_close);
   
         return {
+          ...stock,
           name: stock.symbol || stock.name,
           price: current,
           percent: (((current - previousClose) / previousClose) * 100).toFixed(2) + "%",
@@ -93,9 +182,20 @@ const [watchlist, setWatchList] = useState([]);
   };
   
   useEffect(() => {
-    fetchAllStocks();
-    const interval = setInterval(fetchAllStocks, 15000); // update every 15 seconds
-    return () => clearInterval(interval);
+    const initDefaultWatchlist = async () => {
+      const fetched = await Promise.all(
+        DEFAULT_SYMBOLS.map((symbol) => fetchStock(symbol))
+      );
+      const cleaned = fetched.filter(Boolean); // Remove any nulls
+      setWatchList(cleaned);
+    };
+  
+    initDefaultWatchlist();
+    const interval = setInterval(fetchAllStocks, 100000); // update every 15 seconds
+    return () => 
+      clearInterval(interval);
+    
+    
   }, []);
 
   const handleSearch = async (e) => {
@@ -114,8 +214,9 @@ const [watchlist, setWatchList] = useState([]);
   };
 
   const handleDelete = (symbolToDelete) => {
+    console.log(symbolToDelete)
     setWatchList((prevList) =>
-      prevList.filter((stock) => stock.symbol !== symbolToDelete)
+      prevList.filter((stock) => (stock.symbol || stock.name) !== symbolToDelete)
     );
   };
   const labels = watchlist.map((subArray)=>subArray["name"]);
@@ -160,7 +261,7 @@ const [watchlist, setWatchList] = useState([]);
           value={searchInput}
           onChange={e => setSearchInput(e.target.value)}
           onKeyDown={handleSearch}
-          placeholder="Search eg:infty,bse,nidty fut,gold mcx"
+          placeholder="Search e.g., AAPL, BSE, NIFTY, GOLD"
           className="text"
         />
         <span className="counts">
@@ -171,7 +272,7 @@ const [watchlist, setWatchList] = useState([]);
       <ul className="list">
         {watchlist.map((stock, indx) => {
           return <WatchListitem stock={stock} key={indx} 
-          onDelete={handleDelete}
+          onDelete={()=>handleDelete(stock.symbol || stock.name)}
            />;
         })}
       </ul>
@@ -180,87 +281,3 @@ const [watchlist, setWatchList] = useState([]);
     
   );
 }
-
-      const WatchListitem = ({ stock }) => {
-      const [showWatchlistAction, setShowWatchlistAction] = useState(false);
-    
-        const handleMouseEnter = (e) => {
-          setShowWatchlistAction(true);
-        };
-    
-        const handleMouseLeave = (e) => {
-          setShowWatchlistAction(false);
-        };
-    
-        return (
-          <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <div className="item">
-              <p className={stock.isDown ? "down" : "up"}>{stock.name}</p>
-              <div className="itemInfo">
-                <span className="percent">{stock.percent}</span>
-                {stock.isDown ? (
-                  <KeyboardArrowDown className="down" />
-                ) : (
-                  <KeyboardArrowUp className="up" />
-                )}
-                <span className="price">{stock.price}</span>
-              </div>
-              <button className="delete-button" 
-              onClick={() => onDelete(stock.symbol)  }
->✖</button>
-            </div>
-      {showWatchlistAction && <WatchListActions uid={stock.name} price={stock.price} />}
-          </li>
-        );
-      };
-      const WatchListActions = ({ uid,price }) => {    
-        const generalContext = useContext(GeneralContext);
-
-        const handleBuyClick = () => {
-          generalContext.openBuyWindow(uid,price);
-        };
-
-        const handleSellClick = () =>{
-          generalContext.openSellWindow(uid,price);
-        }
-        return (
-          <span className="actions">
-            <span>
-              <Tooltip
-                title="Buy (B)"
-                placement="top"
-                arrow
-                TransitionComponent={Grow}
-                onClick={handleBuyClick}
-              >
-                <button className="buy">Buy</button>
-              </Tooltip>
-              
-              <Tooltip
-                title="Sell (S)"
-                placement="top"
-                arrow
-                TransitionComponent={Grow}
-                onClick={handleSellClick}
-              >
-                <button className="sell">Sell</button>
-              </Tooltip>
-              <Tooltip
-                title="Analytics (A)"
-                placement="top"
-                arrow
-                TransitionComponent={Grow}
-              >
-                <button className="action">
-                  <BarChartOutlined className="icon" />
-                </button>
-              </Tooltip>
-              <Tooltip title="More" placement="top" arrow TransitionComponent={Grow}>
-                <button className="action">
-                  <MoreHoriz className="icon" />
-                </button>
-              </Tooltip>
-            </span>
-          </span>
-        );
-      };

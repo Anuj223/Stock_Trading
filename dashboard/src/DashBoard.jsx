@@ -5,7 +5,7 @@ import Orders from "./Orders";
 import Holdings from "./Holdings";
 import Position from "./Position";
 import Funds from "./Funds";
-import Apps from "./Apps";
+import Bids from "./Bids";
 
 import "./DashBoard.css"
 import { GeneralContextProvider } from "./GeneralContext";
@@ -52,7 +52,7 @@ export default function DashBoard({username}){
                         <Route path="/holdings" element={<Holdings />} />
                         <Route path="/position" element={<Position />}/>
                         <Route path="/funds" element={<Funds />}/>
-                        <Route path="/apps" element={<Apps />}/>
+                        <Route path="/Bids" element={<Bids />}/>
                 </Routes>
 
                 </div>

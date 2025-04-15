@@ -144,7 +144,7 @@ export default function Menu() {
           </li>
           <li>
             <Link
-              to="/apps"
+              to="/bids"
               style={{ textDecoration: "none" }}
               onClick={() => handleMenuClick(5)}
             >
